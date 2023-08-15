@@ -1,0 +1,3 @@
+title: Custom FTP Server Docker
+description: This repository contains a Docker configuration to set up an FTP server using the Alpine Linux base image.
+theme: minima # or any other Jekyll theme you prefer
