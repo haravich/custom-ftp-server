@@ -1,5 +1,7 @@
 # FTP Server in Docker based on Alpine Linux
 
+[![custom-ftp-server build](https://github.com/haravich/custom-ftp-server/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/haravich/custom-ftp-server/actions/workflows/docker-publish.yml) ![Docker pulls](https://img.shields.io/docker/pulls/haravich/custom-ftp-server)
+
 This repository contains a Docker configuration to set up an FTP server using the Alpine Linux base image. The FTP server supports the following modes
 * FTP (Port 21)
 * FTPS (Port 21) AKA Explicit
