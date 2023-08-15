@@ -39,7 +39,7 @@ jobs:
           type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
           type=ref,event=branch
           type=semver,pattern={{version}}
-          type=sha,prefix={{branch}}-
+          type=sha,prefix={{version}}{{branch}}-
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
