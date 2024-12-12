@@ -12,16 +12,21 @@ PASV_MAX_PORT="${PASV_MAX_PORT:-21110}"
 FTP_MODE="${FTP_MODE:-ftp}"
 LOG_STDOUT="${LOG_STDOUT:-YES}"
 SSL_SUBJECT="${SSL_SUBJECT:-}"
+PEM_FILE="${PEM_FILE:-}"
 
 # GENERATE SELF-SIGNED CERT
-if [ -z "$SSL_SUBJECT" ]; then
-  openssl req -x509 -nodes -days 365 \
-            -newkey rsa:2048 -keyout /etc/vsftpd/vsftpd.pem -out /etc/vsftpd/vsftpd.pem \
-            -subj "/C=IN/O=FTP/CN=ftp.docker.local"
-else 
-  openssl req -x509 -nodes -days 365 \
-            -newkey rsa:2048 -keyout /etc/vsftpd/vsftpd.pem -out /etc/vsftpd/vsftpd.pem \
-            -subj "$SSL_SUBJECT"
+if [ -z "$PEM_FILE" ]; then
+  if [ -z "$SSL_SUBJECT" ]; then
+    openssl req -x509 -nodes -days 365 \
+              -newkey rsa:2048 -keyout /etc/vsftpd/vsftpd.pem -out /etc/vsftpd/vsftpd.pem \
+              -subj "/C=IN/O=FTP/CN=ftp.docker.local"
+  else
+    openssl req -x509 -nodes -days 365 \
+              -newkey rsa:2048 -keyout /etc/vsftpd/vsftpd.pem -out /etc/vsftpd/vsftpd.pem \
+              -subj "$SSL_SUBJECT"
+  fi
+else
+  cp $PEM_FILE /etc/vsftpd/vsftpd.pem
 fi
 
 # Change FTP user's password
