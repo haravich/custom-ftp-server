@@ -35,10 +35,15 @@ Before you begin, ensure you have the following installed:
 
 3. **Generate SSL Certificate:**
 
-    Generate an SSL certificate and private key for FTPS if you plan to use secure connections. We do apply a default certficate is the environment variable `SSL_SUBJECT` not provided.
+    Generate an SSL certificate and private key for FTPS if you plan to use secure connections. We do apply a default certficate if the environment variable `SSL_SUBJECT` not provided.
 
     ```bash
     SSL_SUBJECT="/C=IN/O=haravich/CN=freeops.dev"
+    ```
+
+    If you have your own certificate, you can provide it. The file should contain the full certificate chain starting from the leaf and ending with the CA certificate, followed by the private key in PEM format.
+    ```
+    ... -e FTP_PEM=/tmp/tls/ftp.pem -v /tmp/tls:/tmp/tls ...
     ```
 
 4. **Build and Run**:
@@ -74,6 +79,7 @@ Before you begin, ensure you have the following installed:
     | FTP_MODE | `ftp` | (string) `ftp`/`ftps`/`ftps_implicit`/`ftps_tls` |
     | LOG_STDOUT | `YES` | (bool) `YES`/`NO` |
     | SSL_SUBJECT | - | (string) `/C=IN/O=haravich/CN=freeops.dev` |
+    | PEM_FILE | - | (string) `/tmp/tls/ftp.pem` |
 
 ## Access FTP Server:
 
