@@ -42,10 +42,13 @@ Before you begin, ensure you have the following installed:
     ```
 
     If you have your own certificate, you can provide it. The file should contain the full certificate chain starting from the leaf and ending with the CA certificate, followed by the private key in PEM format.
-    ```
+    ```bash
     ... -e FTP_PEM=/tmp/tls/ftp.pem -v /tmp/tls:/tmp/tls ...
     ```
-
+    (or)
+    ```bash
+    ... -e FTP_PEM="<value_of_pem> | $(cat /tmp/tls/*.pem)" ...
+    ```
 4. **Build and Run**:
 
     Build the Docker image and run the container:
