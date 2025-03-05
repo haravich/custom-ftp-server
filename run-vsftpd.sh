@@ -29,11 +29,6 @@ else
   cp $PEM_FILE /etc/vsftpd/vsftpd.pem
 fi
 
-# Change FTP user's password
-if [ -n "$FTP_PASSWORD" ]; then
-    echo "$FTP_USER:$FTP_PASSWORD" | chpasswd
-fi
-
 # You can set PASV_ADDRESS_INTERFACE to the name of the interface you'd like to
 # bind to and this will look up the IP and set the proper PASV_ADDRESS value.
 if [ -z "$PASV_ADDRESS" ]; then
@@ -55,6 +50,11 @@ fi
 addgroup -g 433 -S $FTP_USER
 adduser -u 431 -D -G $FTP_USER -h /home/vsftpd/$FTP_USER -s /bin/false  $FTP_USER
 chown -R $FTP_USER:$FTP_USER /home/vsftpd/
+
+# Change FTP user's password
+if [ -n "$FTP_PASSWORD" ]; then
+    echo "$FTP_USER:$FTP_PASSWORD" | chpasswd
+fi
 
 # Building the configuration file
 VSFTPD_CONF=/etc/vsftpd/vsftpd.conf
